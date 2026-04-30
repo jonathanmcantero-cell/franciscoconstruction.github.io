@@ -811,12 +811,12 @@
                 <p class="contact-desc" data-i18n="contact.desc">Estamos listos para ayudarte a renovar tu hogar o negocio.</p>
                 <div class="contact-buttons">
                     <a href="#" id="link-main-whatsapp" target="_blank" class="btn-whatsapp">
-                        <i data-lucide="message-circle"></i>
-                        <span data-i18n="contact.cta">Envíanos un mensaje</span>
-                    </a>
-                    <a href="tel:+529127809786" class="btn-outline">
                         <i data-lucide="phone"></i>
-                        912 780 9786
+                        <span data-i18n="contact.cta">Llamar ahora</span>
+                    </a>
+                    <a href="https://wa.me/529127809786" target="_blank" class="btn-outline">
+                        <i data-lucide="message-circle"></i>
+                        WhatsApp
                     </a>
                 </div>
             </div>
@@ -834,10 +834,10 @@
         </div>
     </footer>
 
-    <!-- Floating WhatsApp -->
+    <!-- Floating Phone/WhatsApp -->
     <a href="#" id="link-floating-whatsapp" target="_blank" class="floating-whatsapp fade-in">
         <div class="pulse"></div>
-        <i data-lucide="message-circle" style="width: 32px; height: 32px;"></i>
+        <i data-lucide="phone" style="width: 32px; height: 32px;"></i>
     </a>
 
     <!-- Scripts -->
@@ -916,7 +916,7 @@
                 contact: {
                     title: '¡Cotiza tu proyecto hoy mismo!',
                     desc: 'Estamos listos para ayudarte a renovar tu hogar o negocio.',
-                    cta: 'Envíanos un mensaje',
+                    cta: 'Llamar ahora',
                     mainMsg: 'Hola, me gustaría solicitar una cotización con Francisco Construction.'
                 },
                 footer: {
@@ -958,7 +958,7 @@
                 contact: {
                     title: 'Request your quote today!',
                     desc: 'We are ready to help you renovate your home or business.',
-                    cta: 'Send us a message',
+                    cta: 'Call us now',
                     mainMsg: 'Hello, I would like to request a quote from Francisco Construction.'
                 },
                 footer: {
@@ -982,9 +982,9 @@
                 if(text) el.textContent = text;
             });
 
-            // Update WhatsApp Links
-            document.getElementById('link-main-whatsapp').href = `${WHATSAPP_BASE}?text=${encodeURIComponent(t.contact.mainMsg)}`;
-            document.getElementById('link-floating-whatsapp').href = `${WHATSAPP_BASE}?text=${encodeURIComponent(t.contact.mainMsg)}`;
+            // Update WhatsApp and Phone Links
+            document.getElementById('link-main-whatsapp').href = `tel:+${PHONE_NUMBER}`;
+            document.getElementById('link-floating-whatsapp').href = `tel:+${PHONE_NUMBER}`;
             
             document.getElementById('link-service-0').href = `${WHATSAPP_BASE}?text=${encodeURIComponent(t.services.items[0].msg)}`;
             document.getElementById('link-service-1').href = `${WHATSAPP_BASE}?text=${encodeURIComponent(t.services.items[1].msg)}`;
