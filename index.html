@@ -1,16 +1,1001 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Francisco Construction</title>
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <title>Francisco Construction</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        :root {
+            --font-sans: 'Inter', sans-serif;
+            --font-heading: 'Montserrat', sans-serif;
+            --color-wood: #8B5A2B;
+            --color-wood-light: #A67B5B;
+            --color-gray: #4A4A4A;
+            --color-gray-light: #F5F5F5;
+            --color-whatsapp: #25D366;
+            --color-whatsapp-hover: #1EBE5D;
+            --color-white: #FFFFFF;
+            --color-black: #1A1A1A;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            background-color: var(--color-gray-light);
+            color: var(--color-black);
+            line-height: 1.6;
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--font-heading);
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* Navbar */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid #eee;
+            transition: var(--transition);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            height: 80px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+            font-family: var(--font-heading);
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--color-gray);
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--color-wood);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+
+        .logo span {
+            color: var(--color-wood);
+            font-weight: 400;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .nav-link {
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: var(--color-gray);
+            transition: var(--transition);
+        }
+
+        .nav-link:hover {
+            color: var(--color-wood);
+        }
+
+        .lang-switch {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: var(--color-gray);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            transition: var(--transition);
+        }
+
+        .lang-switch:hover {
+            background: var(--color-gray-light);
+            color: var(--color-wood);
+        }
+
+        .btn-contact {
+            background: var(--color-gray);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 30px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .btn-contact:hover {
+            background: #2a2a2a;
+        }
+
+        /* Hero Section */
+        .hero {
+            position: relative;
+            padding-top: 120px;
+            min-height: 90vh;
+            display: flex;
+            align-items: center;
+            background-image: url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(to right, rgba(0,0,0,0.8), rgba(0,0,0,0.4), transparent);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            width: 100%;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.875rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-badge-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--color-wood);
+            border-radius: 50%;
+        }
+
+        .hero-title {
+            font-size: 4.5rem;
+            color: white;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-title span {
+            background: linear-gradient(to right, var(--color-wood-light), var(--color-wood));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            color: #ddd;
+            margin-bottom: 2.5rem;
+            max-width: 600px;
+            font-weight: 300;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            background: var(--color-wood);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 30px;
+            font-weight: 600;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary:hover {
+            background: var(--color-wood-light);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 30px;
+            font-weight: 600;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        /* About Section */
+        .section {
+            padding: 6rem 0;
+        }
+
+        .bg-white {
+            background: var(--color-white);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-image {
+            position: relative;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+
+        .about-image img {
+            width: 100%;
+            height: 600px;
+            object-fit: cover;
+            transition: transform 0.7s ease;
+        }
+
+        .about-image:hover img {
+            transform: scale(1.05);
+        }
+
+        .section-label {
+            color: var(--color-wood);
+            font-size: 0.875rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 0.5rem;
+        }
+
+        .section-title {
+            font-size: 3rem;
+            color: var(--color-gray);
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+        }
+
+        .about-desc {
+            font-size: 1.125rem;
+            color: #666;
+            margin-bottom: 2rem;
+        }
+
+        .style-section {
+            border-top: 1px solid #eee;
+            padding-top: 2rem;
+        }
+
+        .style-title {
+            font-size: 1.25rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .colors-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+
+        .color-item {
+            cursor: pointer;
+        }
+
+        .color-circle {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            margin-bottom: 1rem;
+            transition: var(--transition);
+        }
+
+        .color-item:hover .color-circle {
+            transform: scale(1.1);
+        }
+
+        .color-title {
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .color-desc {
+            font-size: 0.875rem;
+            color: #666;
+        }
+
+        /* Services Section */
+        .text-center {
+            text-align: center;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 4rem;
+        }
+
+        .service-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 24px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            transition: var(--transition);
+            border: 1px solid transparent;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .service-card:hover {
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            border-color: #eee;
+        }
+
+        .service-icon {
+            width: 64px;
+            height: 64px;
+            background: var(--color-gray-light);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--color-wood);
+            margin-bottom: 1.5rem;
+            transition: var(--transition);
+        }
+
+        .service-card:hover .service-icon {
+            background: var(--color-wood);
+            color: white;
+        }
+
+        .service-title {
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+            transition: var(--transition);
+        }
+
+        .service-card:hover .service-title {
+            color: var(--color-wood);
+        }
+
+        .service-desc {
+            color: #666;
+            flex-grow: 1;
+            margin-bottom: 1.5rem;
+        }
+
+        .service-link {
+            color: var(--color-wood);
+            font-size: 0.875rem;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+            opacity: 0;
+            transform: translateX(-10px);
+            transition: var(--transition);
+        }
+
+        .service-card:hover .service-link {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        /* Contact Section */
+        .contact-card {
+            background: var(--color-gray);
+            border-radius: 40px;
+            padding: 4rem;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.25);
+        }
+
+        .contact-title {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            z-index: 10;
+        }
+
+        .contact-desc {
+            font-size: 1.125rem;
+            color: #ccc;
+            margin-bottom: 2.5rem;
+            position: relative;
+            z-index: 10;
+        }
+
+        .contact-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            position: relative;
+            z-index: 10;
+            flex-wrap: wrap;
+        }
+
+        .btn-whatsapp {
+            background: var(--color-whatsapp);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 30px;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            transition: var(--transition);
+            font-size: 1.125rem;
+        }
+
+        .btn-whatsapp:hover {
+            background: var(--color-whatsapp-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(37, 211, 102, 0.3);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 1px solid rgba(255,255,255,0.3);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 30px;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            transition: var(--transition);
+            font-size: 1.125rem;
+        }
+
+        .btn-outline:hover {
+            background: rgba(255,255,255,0.1);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--color-gray);
+            color: white;
+            padding: 3rem 0;
+            border-top: 1px solid #333;
+            text-align: center;
+        }
+
+        /* Floating WhatsApp */
+        .floating-whatsapp {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: var(--color-whatsapp);
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            z-index: 1000;
+            transition: var(--transition);
+        }
+
+        .floating-whatsapp:hover {
+            transform: scale(1.1);
+            background: var(--color-whatsapp-hover);
+        }
+
+        .pulse {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: var(--color-whatsapp);
+            border-radius: 50%;
+            z-index: -1;
+            animation: ping 2s cubic-bezier(0, 0, 0.2, 1) infinite;
+        }
+
+        @keyframes ping {
+            75%, 100% {
+                transform: scale(1.5);
+                opacity: 0;
+            }
+        }
+
+        /* Mobile Menu */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--color-gray);
+            cursor: pointer;
+        }
+
+        .mobile-nav {
+            display: none;
+            background: white;
+            border-bottom: 1px solid #eee;
+            padding: 1rem 2rem;
+        }
+
+        @media (max-width: 900px) {
+            .nav-links {
+                display: none;
+            }
+            .mobile-menu-btn {
+                display: block;
+            }
+            .mobile-nav.active {
+                display: flex;
+                flex-direction: column;
+                gap: 1rem;
+                position: fixed;
+                top: 80px;
+                left: 0;
+                width: 100%;
+                z-index: 999;
+                box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            }
+            .mobile-nav a {
+                padding: 1rem 0;
+                border-bottom: 1px solid #eee;
+                font-weight: 500;
+            }
+            
+            .hero-title {
+                font-size: 3rem;
+            }
+            .about-grid {
+                grid-template-columns: 1fr;
+            }
+            .about-image img {
+                height: 400px;
+            }
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+            .colors-grid {
+                grid-template-columns: 1fr;
+            }
+            .contact-card {
+                padding: 2rem;
+            }
+            .contact-title {
+                font-size: 2rem;
+            }
+        }
+
+        /* Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav>
+        <div class="nav-container">
+            <div class="logo" onclick="window.scrollTo(0,0)">
+                <div class="logo-icon">
+                    <i data-lucide="hammer"></i>
+                </div>
+                <div>Francisco<span>Construction</span></div>
+            </div>
+
+            <div class="nav-links">
+                <a href="#about" class="nav-link" data-i18n="nav.about">Nosotros</a>
+                <a href="#services" class="nav-link" data-i18n="nav.services">Servicios</a>
+                <a href="#contact" class="nav-link" data-i18n="nav.contact">Contacto</a>
+                <div style="width: 1px; height: 24px; background: #eee;"></div>
+                <button class="lang-switch" onclick="toggleLang()">
+                    <i data-lucide="globe"></i>
+                    <span id="lang-text">EN</span>
+                </button>
+                <a href="#contact" class="btn-contact" data-i18n="nav.contactBtn">Contacto</a>
+            </div>
+
+            <div style="display: flex; align-items: center; gap: 1rem;" class="mobile-only">
+                <button class="lang-switch mobile-menu-btn" onclick="toggleLang()">
+                    <i data-lucide="globe"></i>
+                    <span id="lang-text-mobile">EN</span>
+                </button>
+                <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
+                    <i data-lucide="menu"></i>
+                </button>
+            </div>
+        </div>
+        <div class="mobile-nav" id="mobile-nav">
+            <a href="#about" onclick="toggleMobileMenu()" data-i18n="nav.about">Nosotros</a>
+            <a href="#services" onclick="toggleMobileMenu()" data-i18n="nav.services">Servicios</a>
+            <a href="#contact" onclick="toggleMobileMenu()" data-i18n="nav.contact">Contacto</a>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="hero-content fade-in">
+            <div class="hero-badge">
+                <div class="hero-badge-dot"></div>
+                México
+            </div>
+            <h1 class="hero-title">
+                Francisco <br>
+                <span>Construction</span>
+            </h1>
+            <p class="hero-subtitle" data-i18n="hero.subtitle">
+                Calidad y Confianza en Cada Detalle
+            </p>
+            <div class="hero-buttons">
+                <a href="#services" class="btn-primary" data-i18n="hero.cta">Nuestros Servicios</a>
+                <a href="#contact" class="btn-secondary">
+                    <i data-lucide="phone"></i>
+                    <span data-i18n="nav.contactBtn">Contacto</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About -->
+    <section id="about" class="section bg-white">
+        <div class="container fade-in">
+            <div class="about-grid">
+                <div class="about-image">
+                    <img src="https://images.unsplash.com/photo-1589939705384-5185137a7f0f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Construction" loading="lazy">
+                </div>
+                <div>
+                    <h2 class="section-label" data-i18n="about.title">¿Quiénes Somos?</h2>
+                    <h3 class="section-title" data-i18n="about.headline">Transformando Espacios en México</h3>
+                    <p class="about-desc" data-i18n="about.desc">
+                        En Francisco Construction, nos especializamos en transformar espacios en México. Con años de experiencia en el sector, nos enfocamos en ofrecer acabados de alta calidad que combinan durabilidad y estética.
+                    </p>
+                    
+                    <div class="style-section">
+                        <h4 class="style-title">
+                            <i data-lucide="paintbrush" style="color: var(--color-wood)"></i>
+                            <span data-i18n="about.styleTitle">Nuestro Estilo</span>
+                        </h4>
+                        <div class="colors-grid">
+                            <div class="color-item">
+                                <div class="color-circle" style="background: white; border: 1px solid #ddd;"></div>
+                                <div class="color-title" data-i18n="about.colors.0.name">Blanco</div>
+                                <div class="color-desc" data-i18n="about.colors.0.desc">Para dar amplitud y luz.</div>
+                            </div>
+                            <div class="color-item">
+                                <div class="color-circle" style="background: var(--color-wood);"></div>
+                                <div class="color-title" data-i18n="about.colors.1.name">Madera</div>
+                                <div class="color-desc" data-i18n="about.colors.1.desc">Para calidez y textura.</div>
+                            </div>
+                            <div class="color-item">
+                                <div class="color-circle" style="background: var(--color-gray);"></div>
+                                <div class="color-title" data-i18n="about.colors.2.name">Gris</div>
+                                <div class="color-desc" data-i18n="about.colors.2.desc">Para un toque moderno y sofisticado.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services -->
+    <section id="services" class="section">
+        <div class="container fade-in">
+            <div class="text-center">
+                <h2 class="section-label" data-i18n="services.title">Nuestros Servicios</h2>
+                <h3 class="section-title" data-i18n="services.headline">Excelencia en Cada Proyecto</h3>
+            </div>
+            
+            <div class="services-grid">
+                <!-- Service 1 -->
+                <div class="service-card">
+                    <div class="service-icon"><i data-lucide="layout-template"></i></div>
+                    <h4 class="service-title" data-i18n="services.items.0.title">Instalación de Pisos</h4>
+                    <p class="service-desc" data-i18n="services.items.0.desc">Desde cerámicos hasta acabados modernos.</p>
+                    <a href="#" class="service-link" id="link-service-0" target="_blank">
+                        <span data-i18n="services.learnMore">Saber más</span>
+                        <i data-lucide="chevron-right"></i>
+                    </a>
+                </div>
+                <!-- Service 2 -->
+                <div class="service-card">
+                    <div class="service-icon"><i data-lucide="paintbrush"></i></div>
+                    <h4 class="service-title" data-i18n="services.items.1.title">Pintura Profesional</h4>
+                    <p class="service-desc" data-i18n="services.items.1.desc">Interiores y exteriores con acabados perfectos.</p>
+                    <a href="#" class="service-link" id="link-service-1" target="_blank">
+                        <span data-i18n="services.learnMore">Saber más</span>
+                        <i data-lucide="chevron-right"></i>
+                    </a>
+                </div>
+                <!-- Service 3 -->
+                <div class="service-card">
+                    <div class="service-icon"><i data-lucide="hammer"></i></div>
+                    <h4 class="service-title" data-i18n="services.items.2.title">Tablaroca (Chirock)</h4>
+                    <p class="service-desc" data-i18n="services.items.2.desc">Divisiones, plafones y reparaciones estructurales.</p>
+                    <a href="#" class="service-link" id="link-service-2" target="_blank">
+                        <span data-i18n="services.learnMore">Saber más</span>
+                        <i data-lucide="chevron-right"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" class="section bg-white">
+        <div class="container fade-in">
+            <div class="contact-card">
+                <i data-lucide="hammer" style="position:absolute; top:2rem; right:2rem; width:100px; height:100px; opacity:0.1; transform:rotate(15deg);"></i>
+                <h2 class="contact-title" data-i18n="contact.title">¡Cotiza tu proyecto hoy mismo!</h2>
+                <p class="contact-desc" data-i18n="contact.desc">Estamos listos para ayudarte a renovar tu hogar o negocio.</p>
+                <div class="contact-buttons">
+                    <a href="#" id="link-main-whatsapp" target="_blank" class="btn-whatsapp">
+                        <i data-lucide="message-circle"></i>
+                        <span data-i18n="contact.cta">Envíanos un mensaje</span>
+                    </a>
+                    <a href="tel:+529127809786" class="btn-outline">
+                        <i data-lucide="phone"></i>
+                        912 780 9786
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div style="display: flex; align-items: center; justify-content: center; gap:0.5rem; margin-bottom: 1rem; opacity: 0.8; font-family: var(--font-heading);">
+                <i data-lucide="hammer" style="width: 16px; height: 16px; color: var(--color-wood-light);"></i>
+                FRANCISCO <span style="color: var(--color-wood-light);">CONSTRUCTION</span>
+            </div>
+            <p style="color: #999; font-size: 0.875rem;" data-i18n="footer.rights">© 2026 Francisco Construction. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- Floating WhatsApp -->
+    <a href="#" id="link-floating-whatsapp" target="_blank" class="floating-whatsapp fade-in">
+        <div class="pulse"></div>
+        <i data-lucide="message-circle" style="width: 32px; height: 32px;"></i>
+    </a>
+
+    <!-- Scripts -->
+    <script>
+        // Initialize Lucide Icons
+        lucide.createIcons();
+
+        // Phone Number
+        const PHONE_NUMBER = '529127809786';
+        const WHATSAPP_BASE = `https://wa.me/${PHONE_NUMBER}`;
+
+        // Content Dictionary
+        const content = {
+            es: {
+                nav: {
+                    about: 'Nosotros',
+                    services: 'Servicios',
+                    contact: 'Contacto',
+                    contactBtn: 'Contacto'
+                },
+                hero: {
+                    subtitle: 'Calidad y Confianza en Cada Detalle',
+                    cta: 'Nuestros Servicios'
+                },
+                about: {
+                    title: '¿Quiénes Somos?',
+                    headline: 'Transformando Espacios en México',
+                    desc: 'En Francisco Construction, nos especializamos en transformar espacios en México. Con años de experiencia en el sector, nos enfocamos en ofrecer acabados de alta calidad que combinan durabilidad y estética.',
+                    styleTitle: 'Nuestro Estilo',
+                    colors: [
+                        { name: 'Blanco', desc: 'Para dar amplitud y luz.' },
+                        { name: 'Madera', desc: 'Para calidez y textura.' },
+                        { name: 'Gris', desc: 'Para un toque moderno y sofisticado.' }
+                    ]
+                },
+                services: {
+                    title: 'Nuestros Servicios',
+                    headline: 'Excelencia en Cada Proyecto',
+                    learnMore: 'Saber más',
+                    items: [
+                        { title: 'Instalación de Pisos', desc: 'Desde cerámicos hasta acabados modernos.', msg: 'Hola, me gustaría recibir más información sobre el servicio de Instalación de Pisos.' },
+                        { title: 'Pintura Profesional', desc: 'Interiores y exteriores con acabados perfectos.', msg: 'Hola, me gustaría recibir más información sobre el servicio de Pintura Profesional.' },
+                        { title: 'Tablaroca (Chirock)', desc: 'Divisiones, plafones y reparaciones estructurales.', msg: 'Hola, me gustaría recibir más información sobre el servicio de Tablaroca (Chirock).' }
+                    ]
+                },
+                contact: {
+                    title: '¡Cotiza tu proyecto hoy mismo!',
+                    desc: 'Estamos listos para ayudarte a renovar tu hogar o negocio.',
+                    cta: 'Envíanos un mensaje',
+                    mainMsg: 'Hola, me gustaría solicitar una cotización con Francisco Construction.'
+                },
+                footer: {
+                    rights: '© 2026 Francisco Construction. Todos los derechos reservados.'
+                }
+            },
+            en: {
+                nav: {
+                    about: 'About Us',
+                    services: 'Services',
+                    contact: 'Contact',
+                    contactBtn: 'Contact'
+                },
+                hero: {
+                    subtitle: 'Quality and Trust in Every Detail',
+                    cta: 'Our Services'
+                },
+                about: {
+                    title: 'About Us',
+                    headline: 'Transforming Spaces in Mexico',
+                    desc: 'At Francisco Construction, we specialize in transforming spaces in Mexico. With years of experience in the industry, we focus on delivering high-quality finishes that combine durability and aesthetics.',
+                    styleTitle: 'Our Style',
+                    colors: [
+                        { name: 'White', desc: 'To create space and brightness.' },
+                        { name: 'Wood', desc: 'For warmth and texture.' },
+                        { name: 'Gray', desc: 'For a modern and sophisticated touch.' }
+                    ]
+                },
+                services: {
+                    title: 'Our Services',
+                    headline: 'Excellence in Every Project',
+                    learnMore: 'Learn more',
+                    items: [
+                        { title: 'Flooring Installation', desc: 'From ceramic to modern finishes.', msg: 'Hello, I would like to receive more information about the Flooring Installation service.' },
+                        { title: 'Professional Painting', desc: 'Interior and exterior with perfect finishes.', msg: 'Hello, I would like to receive more information about the Professional Painting service.' },
+                        { title: 'Drywall (Sheetrock)', desc: 'Partitions, ceilings, and structural repairs.', msg: 'Hello, I would like to receive more information about the Drywall (Sheetrock) service.' }
+                    ]
+                },
+                contact: {
+                    title: 'Request your quote today!',
+                    desc: 'We are ready to help you renovate your home or business.',
+                    cta: 'Send us a message',
+                    mainMsg: 'Hello, I would like to request a quote from Francisco Construction.'
+                },
+                footer: {
+                    rights: '© 2026 Francisco Construction. All rights reserved.'
+                }
+            }
+        };
+
+        // State
+        let currentLang = 'es';
+
+        // Translate Function
+        function updateContent() {
+            const t = content[currentLang];
+            
+            // Text Replacements
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const path = el.getAttribute('data-i18n').split('.');
+                let text = t;
+                path.forEach(p => text = text[p]);
+                if(text) el.textContent = text;
+            });
+
+            // Update WhatsApp Links
+            document.getElementById('link-main-whatsapp').href = `${WHATSAPP_BASE}?text=${encodeURIComponent(t.contact.mainMsg)}`;
+            document.getElementById('link-floating-whatsapp').href = `${WHATSAPP_BASE}?text=${encodeURIComponent(t.contact.mainMsg)}`;
+            
+            document.getElementById('link-service-0').href = `${WHATSAPP_BASE}?text=${encodeURIComponent(t.services.items[0].msg)}`;
+            document.getElementById('link-service-1').href = `${WHATSAPP_BASE}?text=${encodeURIComponent(t.services.items[1].msg)}`;
+            document.getElementById('link-service-2').href = `${WHATSAPP_BASE}?text=${encodeURIComponent(t.services.items[2].msg)}`;
+
+            // Update Lang Toggle Text
+            document.getElementById('lang-text').textContent = currentLang === 'es' ? 'EN' : 'ES';
+            document.getElementById('lang-text-mobile').textContent = currentLang === 'es' ? 'EN' : 'ES';
+        }
+
+        // Toggle Language
+        function toggleLang() {
+            currentLang = currentLang === 'es' ? 'en' : 'es';
+            updateContent();
+        }
+
+        // Initialize Content
+        updateContent();
+
+        // Mobile Menu
+        function toggleMobileMenu() {
+            const nav = document.getElementById('mobile-nav');
+            nav.classList.toggle('active');
+        }
+
+        // Scroll Animation Observer (Fade In)
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+    </script>
+</body>
 </html>
 
